@@ -1,0 +1,243 @@
+import "./sign.css";
+import { useState, useEffect } from "react";
+import Complaintpage from "./complaintpage.jsx";
+export default function Status({ username }) {
+  const api = "http://localhost:3000/api/dataretrieve";
+  const addcards = async () => {
+    //  e.preventDefault();
+    try {
+      const res = await fetch(api, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      });
+      const data = await res.json();
+      // localStorage.setItem(data.data);
+      setcomplaint(data.data);
+      console.log(complaint);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const api2 = "http://localhost:3000/api/adminreply";
+  const api3 = "http://localhost:3000/api/dataretreive";
+
+  const sendmessage = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await fetch(api2, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      console.log(form);
+      setmessage((prevMessages) =>
+        Array.isArray(prevMessages) ? [...prevMessages, form] : [form]
+      );
+      console.log(message1);
+      setform((prev) => ({ ...prev, message: "" }));
+      //  setmessage(prev => [...prev,form.message]);
+      setform({ name: " ", message: " ", complaintId: " " });
+      displaychat(form.complaintId);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  const displaychat = async (d) => {
+    try {
+      setid(d);
+      const res = await fetch(api3, {
+        method: "POST",
+        headers: { "Content-type": "application/json" },
+        body: JSON.stringify({ complaintId: d }),
+      });
+      console.log(d);
+      const data1 = await res.json();
+      console.log(data1);
+      // console.dir(data1.data.name+"user");
+      let message = Array.isArray(data1.data) ? data1.data : [data1.data];
+      setmessage(message);
+      console.log(message1);
+      // console.log(message);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  useEffect(() => {
+    addcards();
+  }, []);
+  const back = () => {
+    window.location.reload();
+  };
+
+  const complaintpage = () => {
+    setpage("complaintpage");
+  };
+
+  const [page, setpage] = useState("status");
+  const [complaint, setcomplaint] = useState([]);
+  const [isopen, setisopen] = useState(false);
+  const [openchat,setopenchat]=useState(null);
+  const [message1, setmessage] = useState([]);
+  const [id, setid] = useState("");
+
+ const [form,setform]=useState({name:'',message:'',complaintId:'',sender:'user'});
+  const user = { username };
+
+  console.log(complaint);
+  return (
+    <>
+      {page === "status" && (
+        <>
+          <nav id="complaintnav">
+            <h3>Hello,{username}</h3>
+            {/* <button id="reg">Register complaint</button> */}
+            <button id="status" onClick={complaintpage}>
+              🗄 New Complaint 
+            </button>
+            <button onClick={back}>🔒 Log out</button>
+          </nav>
+          <section id="status2">
+            <div id="status1">
+              <div id="cards">
+                   {complaint.map((item)=>(
+                  <div className="card" key={item.id}>
+                    <table>
+                      <tr>
+                        <td className="title"><img src="https://icon-library.com/images/name-icon-png/name-icon-png-2.jpg " width="30px" height="30px" /></td>
+                        <td>: {item.name}</td>
+                      </tr>
+                      <tr>
+                        <td className="title"><img src="https://cdn-icons-png.flaticon.com/512/4942/4942069.png " width="30px" height="30px" /></td>
+                        <td>: {item.address}</td>
+                      </tr>
+                      <tr>
+                        <td className="title"><img src="https://cdn-icons-png.flaticon.com/512/2451/2451474.png " width="40px" height="40px" /></td>
+                        <td>: {item.city}</td>
+                      </tr>
+                      <tr>
+                        <td className="title"><img src="https://e7.pngegg.com/pngimages/647/766/png-clipart-state-government-computer-icons-others-miscellaneous-blue-thumbnail.png" width="30px" height="30px" /></td>
+                        <td>: {item.state}</td>
+                      </tr>
+                      <tr>
+                        <td className="title"><img src="https://png.pngtree.com/png-clipart/20220521/ourmid/pngtree-red-location-icon-sign-png-image_4644037.png " width="30px" height="30px" /></td>
+                        <td>: {item.pincode}</td>
+                      </tr>
+                      <tr>
+                        <td className="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s " width="30px" height="30px" /></td>
+                        <td id="complaintwidth">: {item.description}</td>
+                      </tr>
+                      <tr> 
+                        <td className="title">Status</td>
+                        <td>
+                        <button>{item.status}</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colSpan="2">
+                          <button
+                            className="message"
+                            onClick={(e) => {
+                              if(openchat === item._id){
+                                setopenchat(null);
+                                }
+                                else{
+                              // setisopen(item._id);
+                              setform({
+                                ...form,
+                                name: item.name,
+                                complaintId: item._id,
+                                sender: "user",
+                              });
+                              //  {setid({complaintId:item._id})}
+                              setopenchat(item._id);
+                                displaychat(item._id);
+                            }
+                            }}
+                          >
+                            message
+                          </button>
+                        </td>
+                      </tr>
+                      {openchat === item._id && (
+                        <tr>
+                          <td colSpan="2">
+                            <div className="chatwindow">
+                              {Array.isArray(message1) ? (
+                                message1.map((msg, index) => (
+                                  <div
+                                    key={index}
+                                    
+                                  >
+                                    {Array.isArray(msg.message) ? (
+                                      
+                                      msg.message.map((line, i) => (
+                                        <p key={i} className={
+                                      line.sender === "user" ? "user" : "admin"
+                                    }>
+                                           <strong>
+                                            {line.sender === "admin"
+                                              ? "Admin"
+                                              : msg.name}
+                                          </strong>
+                                          :
+                                          {line.text}
+                                        </p>
+                                      ))
+                                    ) : (
+                                      <p>{msg.message}</p>
+                                    )}
+                                  </div>
+                                ))
+                              ) : (
+                                <p>Loading messages ...</p>
+                              )}
+                            </div>
+
+                            <div id="reply">
+                              <form onSubmit={sendmessage}>
+                                {/* <input type="hidden" name="name"/>   */}
+                                <input
+                                  type="text"
+                                  name="message"
+                                  placeholder="type message"
+                                  onChange={(e) => {
+                                    setform({
+                                      ...form,
+                                      [e.target.name]: e.target.value,
+                                    });
+                                  }}
+                                />
+                                {/* <input type="hidden" name="complaintId" onChange={(e)=>{setform({...form,[e.target.name]:item._id});}}/> */}
+                                <button id="send">
+                                  <img
+                                  // https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTdzson5nnt3at2eH9CcsLIxLl5o_ZCvhXkkg&s"
+                                    // src="https://cdn0.iconfinder.com/data/icons/flat-ui-5/64/send-chat-message-512.png"
+                                  // src="https://e7.pngegg.com/pngimages/444/562/png-clipart-united-states-small-business-hotel-organization-send-button-angle-rectangle.png"
+                                  src="https://i.redd.it/w39kucuqzvwc1.jpeg"  
+                                  width="30px"
+                                    height="30px"
+                                  />
+                                </button>
+                              </form>
+                            </div>
+                          </td>
+                        </tr>
+                      )}
+                    </table>
+                  </div>
+                ))}
+                
+              </div>
+            </div>
+          </section>
+        </>
+      )}
+      {
+       page === "complaintpage" && <Complaintpage username={username} />}
+    </>
+  )
+}
+   
+
+

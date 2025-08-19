@@ -1,0 +1,532 @@
+nav{
+     display:flex;
+  align-items:center;
+  background-color:skyblue;
+  color:white;
+  text-shadow:2px 2px 3px blue;
+  /* font-size:; */
+  width:100%;
+  height:50px;
+  margin-top:-10px;
+  margin-left:-10px;
+  padding-left:20px;
+}
+nav h1{
+    color:white;
+    text-shadow:2px 2px 4px blue;
+    padding-left:20px;
+
+}
+#home{
+    margin:0px 30px 0px 10px;
+ font-size:large;
+ width:130px;
+ height:30px;
+ color:yellow;
+ background-color:red;
+ border-radius:10px;
+ border:none;
+}
+#log-in{
+    margin:0px 30px 0px 10px;
+ font-size:large;
+ width:130px;
+ color:red;
+ height:30px;
+ background-color:yellow;
+ border-radius:10px;
+ border:none;
+}
+.signin1{
+  /* border:2px solid rgb(60, 4, 116); */
+  background-image:url("https://www.shutterstock.com/image-photo/consumer-feedback-concept-customer-satisfaction-600nw-2103127895.jpg");
+  background-size:100%;
+  /* margin:10px 110px; */
+  /* border-radius:20px; */
+  padding-bottom:20px;
+}
+
+#signin{
+  /* background-color:rgb(246, 246, 247); */
+  color: black;
+  /* padding: 10px; */
+  border-radius: 5px;
+  display:block;
+
+  /* margin:10px  0px 10px; */
+
+}
+#signin form{
+  display:flex;
+  flex-direction:column;
+  /* border:2px solid black; */
+  border-radius:10px;
+  width:450px;
+  box-shadow:2px 2px 10px black;
+  background-color:whitesmoke;
+  height:450px;
+  margin:10px 500px;
+  /* align-items:center; */
+  padding:30px 30px;
+}
+
+
+#signin h2{
+  text-align:center;
+  padding-top:30px;
+  /* color:rgb(60, 4, 116); */
+}
+
+
+
+#signin button{
+  width:410px;
+  height:50px;
+  margin-top:20px;
+  margin-left:10px;
+  background-color:rgb(19, 116, 4);
+  color:rgb(246, 246, 245);
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  font-size:larger;
+}
+#signin label{
+  font-weight:bold;
+  margin-top:10px;
+  font-size:large;
+  color:rgb(9, 12, 204);
+  text-align:left;
+}
+#signin input{
+  width:410px;
+  height:40px;
+  background-color:#877899;
+  margin-top:20px;
+  padding-left:20px;
+  font-size:larger;
+  border-radius:20px;
+  border-top:none;
+  color:white;
+  border-left:none;
+}
+#signin #password{
+  position:relative;
+}
+.eye{
+  position:absolute;
+  top:78%;
+  right:38%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:20px;
+  transition:white 0.2s ease-in-out;
+}
+
+
+
+#signin select{
+    width:150px;
+    height:40px;
+    margin-top:10px;
+    background-color:#887799;
+    color:white;
+    border-radius:10px;
+}
+
+
+
+/* css for login page */
+#login{
+  display:block;
+  background-image:url("https://www.shutterstock.com/image-photo/bad-review-negative-customer-feedback-600nw-2275394851.jpg");
+  background-size:100%;
+  /* color:white; */
+  position:relative;
+  margin:0px;
+  height:80vh;
+  padding:45px 170px;
+}
+#password{
+  position:relative;
+}
+.eye1{
+  position:absolute;
+  top:64%;
+  right:20%;
+  transform:translateY(-50%);
+  cursor:pointer;
+  font-size:20px;
+  z-index:2;
+  transition:black 0.2s ease-in-out;
+}
+
+.login1{
+  margin:35px 300px;
+padding:30px 20px;
+/* color:white; */
+  width:30em;
+  height:30em;
+  border-radius:20px;
+  box-shadow:2px 2px 10px rgb(43, 76, 126);
+  background-color:rgb(43, 76, 126);
+  backdrop-filter:blur(10px);
+}
+
+.login1 h2{
+  text-align:center;
+  padding-top:10px;
+  color:white;
+}
+
+.login1 label{
+  font-weight:bold;
+  margin-top:10px;
+  color:white;
+  font-size:large;
+  text-align:left;
+}
+
+.login1 input{
+  width:410px;
+  height:40px;
+  background-color:#f8f6f9;
+  margin-top:20px;
+  margin-bottom:10px;
+  padding-left:20px;
+  font-size:larger;
+  border-radius:20px;
+  border-top:none;
+  color:blue;
+  border-left:none;
+}
+
+
+.login1 select{
+    width:150px;
+    height:40px;
+    margin-top:10px;
+    margin-bottom:10px;
+    background-color:#f8f6f9;
+    color:blue;
+    border-radius:10px;
+}
+
+.login1 button{
+  width:350px;
+  height:50px;
+  margin-top:0px;
+  margin-left:40px;
+  background-color:rgb(19, 116, 4);
+  color:rgb(246, 246, 245);
+  border-radius:20px;
+  border:none;
+  cursor:pointer;
+  font-size:larger;
+}
+
+.login1 p{
+ text-align:center;
+font-size:large;
+  color:rgb(246, 246, 245);
+  margin-top:10px;
+}
+
+#complaintnav{
+  display:flex;
+
+  align-items:center;
+  background-color:skyblue;
+  color:white;
+  text-shadow:2px 2px 3px blue;
+  width:100%;
+  height:50px;
+  margin: -10px 0px 15px -10px;
+  padding:0px 20px;
+}
+
+#complaintnav h3{
+    color:white;
+    width:380px;
+    text-shadow:2px 2px 4px blue;
+    margin-right:750px;
+    padding-left:20px;
+}
+#complaintnav button{
+    width:150px;
+    height:30px;
+    color:red;
+    font-size:medium;
+    background-color:black;
+    border-radius:10px;
+    margin-right:20px;
+    border:none;
+    cursor:pointer;
+}
+#complaintnav button:hover{
+  background-color:blue;
+  color:white;
+  box-shadow:2px 2px 5px white;
+}
+#complaintnav #reg{
+  width:200px;
+  background-color:black;
+  color:skyblue;
+}
+
+#complaintnav #status{
+  color:yellow;
+  width:150px;
+}
+#complaintnav #status:hover{
+  background-color:blue;
+  color:white;
+  box-shadow:2px 2px 5px white;
+}
+
+#complaint{
+  background-image:url("https://png.pngtree.com/thumb_back/fh260/background/20220222/pngtree-customer-complaint-write-on-notebook-expect-perform-education-photo-image_21544008.jpg");
+  background-size:110% 120%;
+  margin:-10px;
+  padding:0px;
+  height:100vh;
+}
+
+.complaint1{
+  /* background-color:black; */
+  color:white;
+  margin:20px 20px;
+  padding:20px 0px;
+}
+
+.complaint1 form{
+  display:flex;
+ padding:20px 40px;
+ color:blue;
+ text-shadow:2px 2px 5px white;
+  font-size:large;
+ font-weight:bold;
+  backdrop-filter:blur(10px);
+ margin:10px 0px;
+
+}
+
+.complaint1 form div{
+  width:70%;
+  margin:10px 10px;
+  padding:10px 10px;
+}
+.complaint1 form div input,textarea{
+  width:70%;
+  height:40px;
+  background-color:#e8dbf7;
+  margin-top:20px;
+  margin-bottom:20px;
+  padding-left:20px;
+  font-size:larger;
+  border-radius:20px;
+  border-top:none;
+  color:black;
+  border-left:none;
+}
+
+.complaint1 form desc{
+  display:block;
+
+}
+
+.complaint1 form button{
+  width:265px;
+  height:40px;
+  background-color:blue;
+  color:black;
+  font-size:large;
+  margin:43px -200px;
+  font-weight:bold;
+  border:none;
+  border-radius:10px;
+  box-shadow:2px 2px 5px blue;
+}
+
+.complaint1 form textarea{
+  width:460px;
+  height:150px;
+  border-radius:10px;
+}
+
+#status2{
+  background-image:url("https://lh3.googleusercontent.com/proxy/czo-WW97jcbkv-nxzKVie3YgONLiPyrTvUefqIJ4rHB0t78MufwnoKnRjHcc0xv2jzqqiWMRmBc7Tqx0Ke4zUR8fQd6MC7M-1dL7S6U5jZfhQbMubkFliMS3ulhWgbe8_G_hQaD1cabonjBECdUvafB_fc1hhyjXqA");
+  background-size:cover;
+  width:100%;
+  height:100%;
+  margin:-10px -10px;
+  padding:10px 10px ;
+  display:flex;
+}
+
+#status1{
+  width:100%;
+  height:100%;
+  display:flex;
+}
+
+#cards{
+   /* border:2px solid black; */
+   display:flex;
+   flex-wrap:wrap;
+   width:1500px;
+   margin:0px 20px;
+   height:100%;
+}
+
+.card{
+  width:320px;
+  /* border:2px solid black; */
+  height:100%;
+  /* background:linear-gradient(to right,rgb(208, 184, 122),rgb(253, 207, 70)); */
+  background-color:rgba(255, 255, 255, 0.8);
+  box-shadow:2px 4px 8px rgba(8, 8, 8);
+  font-size:large;
+  color:#2c3e50;
+  margin:20px 20px;
+  border:none;
+  border-radius:10px;
+}
+
+.card table {
+  /* color:red; */
+  /* border:2px solid black; */
+  padding:20px 10px;
+  /* background:linear-gradient(to right,blue,white); */
+  border-radius:10px;
+  /* margin:15px 10px; */
+}
+
+.card table td{
+  /* border:2px solid black; */
+  padding:0px 15px;
+  margin:0px;
+  /* margin:10px 10px; */
+
+}
+.card table .title{
+  font-weight:bold;
+  color:rgb(88, 88, 209);
+  font-size:17px;
+}
+.card table .title img{
+  background:none;
+}
+.card table #complaintwidth{
+  height:60px;
+}
+.card button{
+  color:blue;
+  font-size:17px;
+  width:100px;
+  height:30px;
+  background-color:yellow;
+  border-radius:10px;
+  border:none;
+  cursor:pointer;
+  padding:0px;
+  margin:10px 30px;
+}
+.card table .message{
+  background-color:green;
+  color:white;
+  font-size:large;
+  width:200px;
+
+}
+
+.card button:hover{
+  background-color:blue;
+  color:yellow;
+  box-shadow:2px 2px 5px black;
+}
+#reply form{
+  width:100%;
+  height:100%;
+  display:flex;
+  flex-direction:row;
+  align-items:center;
+  justify-content:center;
+  background-color:rgba(255, 255, 255, 0.8);
+}
+
+#reply input{
+  width:150px;
+  height:30px;
+  background-color:whitesmoke;
+  border:none;
+  border-radius:10px;
+  display:block;
+  margin:10px 10px;
+  padding:10px 10px;
+
+}
+
+#reply button{
+  width:50px;
+  height:50px;
+  /* background-color:rgb(19, 116, 4); */
+  background:transparent;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  margin:10px 10px;
+}
+#reply button img{
+  width:100%;
+  height:100%;
+  border-radius:50px;
+  background:transparent;
+}
+.chatwindow{
+  width:92%;
+  height:200px;
+  margin:0px -16px;
+  padding:0px 30px 0px 5px;
+  overflow:hidden;
+  overflow-y:scroll;
+  background-color:rgba(206, 243, 245, 0.8);
+  border-radius:5px;
+  /* box-shadow:2px 2px 5px black; */
+
+}
+
+.chatwindow  .user{
+     background-color:whitesmoke;
+     color:blue;
+     height:100%;
+     width:100%;
+     padding:0px 10px;
+     margin:5px 5px;
+     border-radius:5px;
+}
+.chatwindow .admin{
+  background-color:lightgreen;
+  color:blue;
+  width:108%;
+  height:100%;
+  margin:3px 10px 0px 5px;
+  border-radius:5px;
+  padding: 0px 0px 0px 0px;
+  text-align:right;
+}
+
+.chatwindow .admin strong {
+  padding-right:3px;
+  color:rgb(245, 137, 137);
+  font-weight:lighter;
+}
+
+.chatwindow .user strong{
+  padding-right:3px;
+  color:orange;
+  font-weight:lighter;
+}
+
+
+
