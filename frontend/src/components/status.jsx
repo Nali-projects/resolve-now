@@ -1,7 +1,14 @@
 import "./sign.css";
+import {io} from "socket.io-client";
 import { useState, useEffect } from "react";
 import Complaintpage from "./complaintpage.jsx";
 export default function Status({ username }) {
+  const socket=io("http://localhost:3000",{
+    transports:["websocket"],
+    reconnection:true,
+    reconnectionAttempts:10,
+    reconnectionDelay:1000
+  });
   const api = "http://localhost:3000/api/dataretrieve";
   const addcards = async () => {
     //  e.preventDefault();
@@ -38,6 +45,8 @@ export default function Status({ username }) {
       setform((prev) => ({ ...prev, message: "" }));
       //  setmessage(prev => [...prev,form.message]);
       setform({ name: " ", message: " ", complaintId: " " });
+      socket.emit("usermessage",{userid:form.complaintId,text:form.message,username:username});
+    console.log("notify",notify);
       displaychat(form.complaintId);
     } catch (err) {
       console.log(err);
@@ -51,14 +60,14 @@ export default function Status({ username }) {
         headers: { "Content-type": "application/json" },
         body: JSON.stringify({ complaintId: d }),
       });
-      console.log(d);
+      // console.log(d);
       const data1 = await res.json();
-      console.log(data1);
+      // console.log(data1);
       // console.dir(data1.data.name+"user");
       let message = Array.isArray(data1.data) ? data1.data : [data1.data];
       setmessage(message);
-      console.log(message1);
-      // console.log(message);
+    
+
     } catch (err) {
       console.log(err);
     }
@@ -66,6 +75,14 @@ export default function Status({ username }) {
   useEffect(() => {
     addcards();
   }, []);
+  useEffect(()=>{
+    socket.emit("joinuser",username);
+    socket.on("newmessagefromadmin",(msg)=>{
+      setnotify(msg);
+      setTimeout(()=>setnotify(null),5000);
+    })
+      return()=>socket.off("newmessagefromadmin");
+  },[username])
   const back = () => {
     window.location.reload();
   };
@@ -75,6 +92,7 @@ export default function Status({ username }) {
   };
 
   const [page, setpage] = useState("status");
+  const[notify,setnotify]=useState(null);
   const [complaint, setcomplaint] = useState([]);
   const [isopen, setisopen] = useState(false);
   const [openchat,setopenchat]=useState(null);
@@ -104,7 +122,7 @@ export default function Status({ username }) {
                   <div className="card" key={item.id}>
                     <table>
                       <tr>
-                        <td className="title"><img src="https://icon-library.com/images/name-icon-png/name-icon-png-2.jpg " width="30px" height="30px" /></td>
+                        <td className="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIf4R5qPKHPNMyAqV-FjS_OTBB8pfUV29Phg&s " width="30px" height="30px" /></td>
                         <td>: {item.name}</td>
                       </tr>
                       <tr>
@@ -127,6 +145,14 @@ export default function Status({ username }) {
                         <td className="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s " width="30px" height="30px" /></td>
                         <td id="complaintwidth">: {item.description}</td>
                       </tr>
+                      <tr>
+                        <td className="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s " width="30px" height="30px" /></td>
+                        <td  className="imagewidth"><img  src={`data:${item.image.contentType};base64,${btoa(
+      new Uint8Array(item.image.data.data).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      )
+    )}`} /></td>  </tr>
                       <tr> 
                         <td className="title">Status</td>
                         <td>
@@ -163,7 +189,7 @@ export default function Status({ username }) {
                         <tr>
                           <td colSpan="2">
                             <div className="chatwindow">
-                              {Array.isArray(message1) ? (
+                            {Array.isArray(message1) ? (
                                 message1.map((msg, index) => (
                                   <div
                                     key={index}
@@ -191,7 +217,17 @@ export default function Status({ username }) {
                                 ))
                               ) : (
                                 <p>Loading messages ...</p>
-                              )}
+                              )} 
+                              {/* {Array.isArray(message1) ? (
+  message1.map((msg, index) => (
+    <p key={index} className={msg.sender === "user" ? "user" : "admin"}>
+      <strong>{msg.sender === "admin" ? "Admin" : msg.name}</strong>: {msg.text}
+    </p>
+  ))
+) : (
+  <p>Loading messages ...</p>
+)} */}
+                              
                             </div>
 
                             <div id="reply">
@@ -227,7 +263,12 @@ export default function Status({ username }) {
                     </table>
                   </div>
                 ))}
-                
+                {
+                  notify && <div className="notification">
+                    <h4>Message from {notify.from}</h4>
+                    <p>{notify.username} : <small>{notify.text}</small></p>
+                  </div>
+                }
               </div>
             </div>
           </section>
@@ -239,5 +280,6 @@ export default function Status({ username }) {
   )
 }
    
+
 
 
