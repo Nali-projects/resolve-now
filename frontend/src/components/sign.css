@@ -234,7 +234,7 @@ font-size:large;
 
 #complaintnav{
   display:flex;
-
+  position:relative;
   align-items:center;
   background-color:skyblue;
   color:white;
@@ -352,6 +352,20 @@ font-size:large;
   width:460px;
   height:150px;
   border-radius:10px;
+}
+.complaint1 form #img{
+  width:400px;
+  height:30px;
+  background-color:#e8dbf7;
+  margin-top:-9px;
+  margin-bottom:6px;
+  padding-left:20px;
+  padding-top:10px;
+  font-size:smaller;
+  border-radius:20px;
+  border-top:none;
+  color:black;
+  border-left:none;
 }
 
 #status2{
@@ -528,5 +542,43 @@ font-size:large;
   font-weight:lighter;
 }
 
+h5{
+  display: inline-block;
+    padding: 0px 0px 0px 10px;
+    color:crimson;
+    /* text-shadow:3px 2px 10px deeppink; */
+}
 
+.imagewidth img{
+  width:150px;
+  height:75px;
+  /* background-color:whitesmoke; */
+  /* background-size:cover; */
+  border-radius:5px;
+  padding:5px;
+  margin:5px 0px;
+}
 
+.notification{
+position:absolute;
+top:15px;
+left:75%;
+right:5px;
+border:2px solid blueviolet;
+border-radius:10px;
+padding:10px;
+background:white;
+color:blue;
+}
+
+.notification h4,p,small{
+  margin:0px;
+  padding:0px;
+}
+.notification h4{
+  font-size:20px;
+  border:2px solid grey;
+  color:white;
+  border-radius:10px;
+  background:blue;
+}
