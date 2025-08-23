@@ -14,7 +14,9 @@
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
     "react-router-dom": "^7.6.3",
-    "socket.io-client": "^4.8.1"
+    "socket.io-client": "^4.8.1",
+    "react-image-lightbox": "^5.1.4",
+    "recharts": "^3.1.2"
   },
   "devDependencies": {
     "@eslint/js": "^9.25.0",
