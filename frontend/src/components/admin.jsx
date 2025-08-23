@@ -237,12 +237,22 @@ export default function Admin({ username }) {
       )
     )}`}onClick={()=>setopen(true)}/></td></tr>
 
-    {open && (<Lightbox mainSrc={`data:${item.image.contentType};base64,${btoa(
-      new Uint8Array(item.image.data.data).reduce(
-        (data, byte) => data + String.fromCharCode(byte),
-        ""
-      )
-    )}`} onCloseRequest={()=> setopen(false)} />)}
+    {open && (
+  <Lightbox
+    open={open}
+    close={() => setopen(false)}
+    slides={[
+      {
+        src: `data:${item.image.contentType};base64,${btoa(
+          new Uint8Array(item.image.data.data).reduce(
+            (data, byte) => data + String.fromCharCode(byte),
+            ""
+          )
+        )}`
+      }
+    ]}
+  />
+)}
                       
                               
                       <tr>
@@ -394,4 +404,5 @@ export default function Admin({ username }) {
 {
   /* complaint : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s */
 }
+
 
