@@ -2,8 +2,8 @@ import { useState, useEffect } from "react";
 import {io} from "socket.io-client";
 import "./sign.css";
 import Stats from "./stats.jsx";
-import Lightbox from "react-image-lightbox";
-import "react-image-lightbox/style.css";
+import Lightbox from "yet-another-react-lightbox";
+import "yet-another-react-lightbox/styles.css";
 
 export default function Admin({ username }) {
 
@@ -394,3 +394,4 @@ export default function Admin({ username }) {
 {
   /* complaint : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s */
 }
+
