@@ -1,5 +1,5 @@
-import Sign from "./componets/sign.jsx";
-import Log from "./componets/log.jsx";
+import Sign from "./components/sign.jsx";
+import Log from "./components/log.jsx";
 import {useState,useEffect} from 'react';
 import { getData } from "./api";
 
