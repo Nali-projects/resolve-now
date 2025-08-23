@@ -1,9 +1,13 @@
 import Sign from "./componets/sign.jsx";
 import Log from "./componets/log.jsx";
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
+import { getData } from "./api";
 
+const [data, setData] = useState([]);
 
-
+  useEffect(() => {
+    getData().then(setData);
+  }, []);
 function App() {
   // document.getElementById("sign-in").addEventListener("click",()=>{
   //   document.getElementById("signin").style.display="block";})
@@ -43,6 +47,10 @@ function openlog(){
     }
       {currentpage ==='sign' && <Sign/>}
       {currentpage === 'log' && <Log/>}
+      <div>
+      <h1>My Backend Data</h1>
+      <pre>{JSON.stringify(data, null, 2)}</pre>
+    </div>
       </>
   );
 }
