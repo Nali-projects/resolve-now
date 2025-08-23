@@ -1,6 +1,18 @@
 import { useState, useEffect } from "react";
+import {io} from "socket.io-client";
 import "./sign.css";
+import Stats from "./stats.jsx";
+import Lightbox from "react-image-lightbox";
+import "react-image-lightbox/style.css";
+
 export default function Admin({ username }) {
+
+  const socket=io("http://localhost:3000",{
+    transports:["websocket"],
+     reconnection:true,
+        reconnectionAttempts:10,
+        reconnectionDelay:1000
+  });
   const api = "http://localhost:3000/api/admin";
   const api2 = "http://localhost:3000/api/adminreply";
   const api3 = "http://localhost:3000/api/dataretreive";
@@ -14,13 +26,17 @@ export default function Admin({ username }) {
         body: JSON.stringify(form),
       });
       console.log(form);
+      socket.emit("sendmessage",form);
       setmessage((prevMessages) =>
         Array.isArray(prevMessages) ? [...prevMessages, form] : [form]
       );
       setform((prev) => ({ ...prev, message: "" }));
       //  setmessage(prev => [...prev,form.message]);
-      setform({ name: " ", message: " ", complaintId: " " });
-      displaychat(form.complaintId);
+      setform({ name:"", message:"", complaintId:"" });
+      socket.emit("adminmsg",{userid:form.name,text:form.message,username:username});
+      // setmessage("");
+      console.log("notify",notify);
+  displaychat(form.complaintId);
     } catch (err) {
       console.log(err);
     }
@@ -95,6 +111,15 @@ export default function Admin({ username }) {
     usercomplaint();
   }, []);
 
+  useEffect(()=>{
+    socket.emit("joinadmin");
+    socket.on("newmsgfromuser",(msg)=>{
+      setnotify(msg);
+     setTimeout(()=>setnotify(null),5000);
+    });
+    return()=>socket.off("newmsgfromuser");
+    },[])
+
   // document.getElementById("message").addEventListener("click",()=>{
   //           document.getElementById("reply").style.display="block";
   //  }
@@ -103,6 +128,8 @@ export default function Admin({ username }) {
     window.location.reload();
   };
 
+ 
+  const [open,setopen]=useState(false);
   const [page, setpage] = useState("admin");
   const [form, setform] = useState({
     name: "",
@@ -114,6 +141,11 @@ export default function Admin({ username }) {
   const [isopen, setisopen] = useState("");
   const [id, setid] = useState({ complaintId: "" });
   const [message1, setmessage] = useState([]);
+  const [notify,setnotify]=useState(null);
+
+   const openstats=()=>{
+    setpage("stats");
+  }
   return (
     <>
       {page === "admin" && (
@@ -121,7 +153,7 @@ export default function Admin({ username }) {
           <nav id="complaintnav">
             <h3>Hello,{username}</h3>
             <button onClick={back}>Log Out</button>
-
+            <button onClick={openstats} >complaintstats</button> 
           </nav>
           <section id="status2">
             <div id="status1">
@@ -132,7 +164,7 @@ export default function Admin({ username }) {
                       <tr>
                         <td className="title">
                           <img
-                            src="https://icon-library.com/images/name-icon-png/name-icon-png-2.jpg "
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIf4R5qPKHPNMyAqV-FjS_OTBB8pfUV29Phg&s "
                             width="30px"
                             height="30px"
                           />
@@ -189,9 +221,33 @@ export default function Admin({ username }) {
                         </td>
                         <td id="complaintwidth">: {item.description}</td>
                       </tr>
+                          
+                      <tr>
+                        <td className="title">
+                          <img
+                            src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s "
+                            width="30px"
+                            height="30px"
+                          />
+                        </td>
+                       <td  className="imagewidth"><img  src={`data:${item.image.contentType};base64,${btoa(
+      new Uint8Array(item.image.data.data).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      )
+    )}`}onClick={()=>setopen(true)}/></td></tr>
+
+    {open && (<Lightbox mainSrc={`data:${item.image.contentType};base64,${btoa(
+      new Uint8Array(item.image.data.data).reduce(
+        (data, byte) => data + String.fromCharCode(byte),
+        ""
+      )
+    )}`} onCloseRequest={()=> setopen(false)} />)}
+                      
+                              
                       <tr>
                         <td className="title">Status</td>
-                        <td>
+                        <td> 
                           <button style={{
         backgroundColor: item.status === "Completed" ? "yellow" : "blue",
         color: item.status === "Completed" ? "blue" : "yellow",
@@ -221,10 +277,11 @@ export default function Admin({ username }) {
                               });
                               //  {setid({complaintId:item._id})}
                                 displaychat(item._id);
+                                setnotify(null);
                             }
                             }}
                           >
-                            {" "}
+                            
                            💬 message
                           </button>
                         </td>
@@ -304,15 +361,23 @@ export default function Admin({ username }) {
                     </table>
                   </div>
                 )) }
-                
+                 {
+                  notify && <div className="notification">
+                    <h4>New Message  {notify.from}</h4>
+                  <p>{notify.username}<small> :{notify.text}</small></p>  
+                    </div>
+                 }
               </div>
             </div>
           </section>
         </>
       )}
+      {page ==="stats" && <Stats />}
     </>
+    
   )
 }
+
 
 {
   /* location:https://png.pngtree.com/png-clipart/20220521/ourmid/pngtree-red-location-icon-sign-png-image_4644037.png */
