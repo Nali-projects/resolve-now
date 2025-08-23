@@ -1,11 +1,23 @@
 const express = require('express');
+const multer=require('multer');
 const mongoose = require('mongoose');
 const cors = require('cors');
+const http=require('http');
+const {Server}= require('socket.io');
+
 const { users,messages } = require('./schema'); // Importing the user schema
 const app = express();
+
+const server=http.createServer(app);
+const io=new Server(server,{
+    cors:{
+        origin:"http://localhost:5173", // Adjust this to your frontend URL
+        methods:["GET","POST"],
+        credentials:true,
+    }
+})
 app.use(cors());
 app.use(express.json());
-
 // MongoDB Connection
 mongoose.connect("mongodb://localhost:27017/complaintdb")
     .then(() => console.log("Connected to database"))
@@ -20,8 +32,12 @@ const complaintSchema = new mongoose.Schema({
     pincode: { type: String, required: true },
     description: { type: String, required: true },
     usertype:{type:String,required:true},
+    image:{data:Buffer,contentType:String},
+    created:{type:Date,default:Date.now},
     status: { type: String, default: "Pending" }
 });
+
+
 
 
 
@@ -30,10 +46,28 @@ const Complaint = mongoose.model("complaint", complaintSchema);
 // const UsersData = mongoose.model("usersdata", userSchema);
 
 // ✅ Complaint APIs
-app.post("/api/complaint", async (req, res) => {
-    try {
-        const newComplaint = new Complaint(req.body);
+const storage = multer.memoryStorage();
+const upload = multer({
+  storage,
+  limits: { fileSize: 16 * 1024 * 1024 }, // 16 MB
+});
+
+// API: Save complaint
+app.post("/api/complaint",upload.single("image"), async (req, res) => {
+  try {
+    const newComplaint = new Complaint({
+        name: req.body.name,
+        address: req.body.address,
+        city: req.body.city,
+        state: req.body.state,
+        pincode: req.body.pincode,
+        description: req.body.description,
+        status: "Pending",
+        usertype: req.body.usertype,
+        image:req.file ?{data:req.file.buffer, contentType:req.file.mimetype} : null // Assuming image is a Base64 string
+    });
         const saveComplaint = await newComplaint.save();
+        console.log(newComplaint);
         res.json({ message: 'Complaint saved successfully', data: saveComplaint });
     } catch (error) {
         res.status(500).json({ message: 'Failed to save complaint', error: error.message });
@@ -164,7 +198,66 @@ app.put("/api/updatestatus",async (req,res)=>{
     
 }
 });
+//complaint stats
+app.get("/api/complaintstats", async (req, res) => {
+    try {
+        const stats= await Complaint.aggregate([
+            {
+                $group: {
+                  _id: {
+                    year:{$year:"$created"},
+                    month:{$month:"$created"}
+                  },
+                  total:{$sum:1},
+                  pending:{
+                    $sum:{$cond:[{$eq:["$status","pending"]},1,0]}
+                  },
+                  completed:{
+                    $sum:{$cond:[{$eq:["$status","completed"]},1,0]}
+                  }
+                }},{$sort:{"_id.year":-1,"_id.month":-1}} ]);
 
+            
+            res.json({ message: 'Complaint stats retrieved successfully', data: stats });
+
+        } 
+        catch(err){
+              console.log(err);
+             res.status(500).json({ message: 'Failed to retrieve complaint stats', error: err.message });
+
+          }
+});
+// notification of msg
+io.on("connection",(socket)=>{
+    
+    socket.on("joinuser",(username)=>{ 
+        // connectedUsers[username] = socket.username;
+        socket.join(`user_${username}`);
+        console.log("user connected:",username);
+        
+    });
+    socket.on("joinadmin",()=>{
+        // console.log("user disconnected:",socket.id);
+        socket.join("admin");
+        console.log("admin connected");
+    });
+    socket.on("usermessage",({text,userid,username})=>{
+        io.to("admin").emit("newmsgfromuser",{
+            from:username,
+text,
+username,
+time:new Date(),
+       });
+    })
+    socket.on("adminmsg",({text,username,userid}) =>{
+        io.to(`user_${userid}`).emit("newmessagefromadmin",{
+            from:"admin",
+            text,
+            username,
+            time:new Date(),
+        })
+    })
+});
 
 app.get("/api/admin", async(req,res)=>{
     const result=await Complaint.find();
@@ -179,6 +272,6 @@ app.get("/App", (req, res) => {
 
 // ✅ Start Server
 const port =3000;
-app.listen(port, () => {
+server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
