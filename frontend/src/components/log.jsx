@@ -5,7 +5,9 @@ import Sign from "./sign.jsx";
 import Admin from "./admin.jsx";
 import { useState } from "react";
 export default function Log() {
-  const api = "http://localhost:3000/api/userlog";
+  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const api  = `${BASE_URL}/api/userlog`;
   const verifydata = async (e) => {
     e.preventDefault();
     try {
@@ -117,3 +119,4 @@ export default function Log() {
     </>
   );
 }
+
