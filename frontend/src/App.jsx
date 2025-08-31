@@ -5,15 +5,15 @@ import { getData } from "./api";
 
 
 
-  useEffect(() => {
-    getData().then(setData);
-  }, []);
+  
 function App() {
   const [data, setData] = useState([]);
   // document.getElementById("sign-in").addEventListener("click",()=>{
   //   document.getElementById("signin").style.display="block";})
   const [currentpage,setcurrentpage]=useState('home');
-  
+  useEffect(() => {
+    getData().then(setData);
+  }, []);
 
   function opensign(){
 
