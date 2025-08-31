@@ -1,6 +1,7 @@
 #body{
   /* background:repeating-radial-gradient( rgb(246, 246, 247) , rgb(197, 137, 242)); */
   background-color:white;
+  
 }
 nav{
   display:flex;
