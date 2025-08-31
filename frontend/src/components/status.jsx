@@ -9,7 +9,10 @@ export default function Status({ username }) {
     reconnectionAttempts:10,
     reconnectionDelay:1000
   });
-  const api = "http://localhost:3000/api/dataretrieve";
+  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const api  = `${BASE_URL}/api/dataretrieve`;
+
   const addcards = async () => {
     //  e.preventDefault();
     try {
@@ -280,6 +283,7 @@ export default function Status({ username }) {
   )
 }
    
+
 
 
 
