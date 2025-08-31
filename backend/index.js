@@ -19,7 +19,7 @@ const io=new Server(server,{
 app.use(cors());
 app.use(express.json());
 // MongoDB Connection
-mongoose.connect("mongodb+srv://knowledgeseekers41214_db_user:Nali12##@cluster0.herxn7r.mongodb.net/")
+mongoose.connect("mongodb+srv://knowledgeseekers41214_db_user:Nali12##@complaints.hvmtz9x.mongodb.net/")
     .then(() => console.log("Connected to database"))
     .catch((err) => console.log("Not connected", err));
 
@@ -275,4 +275,5 @@ const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
