@@ -10,7 +10,10 @@ export default function Complaintpage({username}){
          setform({...form,[e.target.name]:e.target.value});
    }
 
-const api="http://localhost:3000/api/complaint";
+const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const api  = `${BASE_URL}/api/complaint`;
+
    const savedata=async (e)=>{
        e.preventDefault();
           const formData = new FormData();
@@ -102,4 +105,5 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
         </>
     )
 }
+
 
