@@ -3,12 +3,13 @@ import Log from "./components/log.jsx";
 import {useState,useEffect} from 'react';
 import { getData } from "./api";
 
-const [data, setData] = useState([]);
+
 
   useEffect(() => {
     getData().then(setData);
   }, []);
 function App() {
+  const [data, setData] = useState([]);
   // document.getElementById("sign-in").addEventListener("click",()=>{
   //   document.getElementById("signin").style.display="block";})
   const [currentpage,setcurrentpage]=useState('home');
