@@ -24,7 +24,10 @@ import Admin from './admin.jsx';
 
 export default function Sign() {
 
-  const api="http://localhost:3000/api/users";
+  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+
+const api  = `${BASE_URL}/api/users`;
+
   const [form,setForm]=useState({name:'',email:'',password:'', usertype:'' });
 const senddata=async (e)=>{
     e.preventDefault();
@@ -134,3 +137,4 @@ function openlog(){ setpage('log'); }
     </>
   );
 }
+
