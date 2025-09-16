@@ -6,7 +6,7 @@ import "yet-another-react-lightbox/styles.css";
 
 export default function Admin({ username }) {
 
-  const socket=io("http://localhost:3000",{
+  const socket=io(import.meta.env.VITE_API_URL,{
     transports:["websocket"],
      reconnection:true,
         reconnectionAttempts:10,
@@ -405,6 +405,7 @@ const api4 = `${BASE_URL}/api/updatestatus`;
 {
   /* complaint : https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQwoLK8Utu4B1ZsfE5X0N7CgOLwRgThRnWa9g&s */
 }
+
 
 
 
