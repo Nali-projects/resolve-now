@@ -115,7 +115,7 @@ nav h1{
 }
 .eye{
   position:absolute;
-  top:78%;
+  top:74%;
   right:38%;
   transform:translateY(-50%);
   cursor:pointer;
@@ -582,3 +582,4 @@ color:blue;
   border-radius:10px;
   background:blue;
 }
+
