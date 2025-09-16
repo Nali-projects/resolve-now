@@ -29,8 +29,8 @@ const api  = `${BASE_URL}/api/dataretrieve`;
       console.log(err);
     }
   };
-  const api2 = "http://localhost:3000/api/adminreply";
-  const api3 = "http://localhost:3000/api/dataretreive";
+  const api2 = `${BASE_URL}/api/adminreply`;
+  const api3 = `${BASE_URL}/api/dataretreive`;
 
   const sendmessage = async (e) => {
     e.preventDefault();
@@ -283,6 +283,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
