@@ -3,7 +3,7 @@ import {io} from "socket.io-client";
 import { useState, useEffect } from "react";
 import Complaintpage from "./complaintpage.jsx";
 export default function Status({ username }) {
-  const socket=io("http://localhost:3000",{
+  const socket=io(import.meta.env.VITE_API_URL,{
     transports:["websocket"],
     reconnection:true,
     reconnectionAttempts:10,
@@ -283,6 +283,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
