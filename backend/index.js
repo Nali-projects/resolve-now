@@ -95,7 +95,7 @@ app.post("/api/dataretrieve",async (req,res)=>{
      if(result){
          res.json({message:"data fetched",data:result});
      }
-
+     console.log(result);
 
 })
 
@@ -278,6 +278,7 @@ const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
