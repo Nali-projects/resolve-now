@@ -269,13 +269,16 @@ app.get("/api/admin", async(req,res)=>{
     const result=await Complaint.find();
     res.json({message:"data retrieved",data:result});
 })
-
+app.get("/", (req, res) => {
+  res.redirect("https://resolve-now-1.onrender.com");
+});
 
 // ✅ Start Server
 const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
