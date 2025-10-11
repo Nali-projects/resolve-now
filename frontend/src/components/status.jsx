@@ -25,6 +25,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
       // localStorage.setItem(data.data);
       setcomplaint(data.data);
       console.log(complaint);
+      console.log("complaint");
     } catch (err) {
       console.log(err);
     }
@@ -283,6 +284,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
