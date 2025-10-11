@@ -16,7 +16,13 @@ const io=new Server(server,{
         credentials:true,
     }
 })
-app.use(cors());
+app.use(cors(
+    {
+         origin:"https://resolve-now-1.onrender.com", // Adjust this to your frontend URL
+        methods:["GET","POST"],
+        credentials:true
+    }
+));
 app.use(express.json());
 // MongoDB Connection
 mongoose.connect("mongodb+srv://naliuser:ra9mqdUoMNZb7sNb@cluster0.sjvoswx.mongodb.net/complaints?retryWrites=true&w=majority&appName=Cluster0")
@@ -275,6 +281,7 @@ const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
