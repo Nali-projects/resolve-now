@@ -2,9 +2,6 @@ import Sign from "./components/sign.jsx";
 import Log from "./components/log.jsx";
 import {useState,useEffect} from 'react';
 import { getData } from "./api";
-
-
-
   
 function App() {
   const [data, setData] = useState([]);
@@ -48,10 +45,10 @@ function openlog(){
     }
       {currentpage ==='sign' && <Sign/>}
       {currentpage === 'log' && <Log/>}
-      <div>
+      {/* <div>
       <h1>My Backend Data</h1>
       <pre>{JSON.stringify(data, null, 2)}</pre>
-    </div>
+    </div> */}
       </>
   );
 }
