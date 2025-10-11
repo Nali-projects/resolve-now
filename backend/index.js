@@ -270,17 +270,13 @@ app.get("/api/admin", async(req,res)=>{
     res.json({message:"data retrieved",data:result});
 })
 
-// ✅ Simple route5
-app.get("/App", (req, res) => {
-    res.send("Home page");
-});
-
 
 // ✅ Start Server
 const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
