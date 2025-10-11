@@ -123,7 +123,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
             <div id="status1">
               <div id="cards">
                    {complaint.map((item)=>(
-                  <div className="card" key={item.id}>
+                  <div className="card" key={item._id}>
                     <table>
                       <tr>
                         <td className="title"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQIf4R5qPKHPNMyAqV-FjS_OTBB8pfUV29Phg&s " width="30px" height="30px" /></td>
@@ -284,6 +284,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
