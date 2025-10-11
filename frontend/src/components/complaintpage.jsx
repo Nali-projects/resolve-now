@@ -91,7 +91,7 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
                           <label>Description: </label><br></br>
                         <textarea rows="5" cols="50" name="description"onChange={handlechange} required></textarea><br></br>
                         <label>image: </label><h5>Size should be less than 16MB</h5><br></br>
-                        <input type="file" name="image"  accept="image/*" onChange={(e)=>setimage(e.target.files[0])} id="img"/><br></br>
+                        <input type="file" name="image"  accept="image/*" onChange={(e)=>setimage(e.target.files[0])} id="img" required/><br></br>
                         <br />
                         <button type="submit" id="complaintbtn">Submit</button>
                         </div> <br></br>
@@ -105,5 +105,6 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
         </>
     )
 }
+
 
 
