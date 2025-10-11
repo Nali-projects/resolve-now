@@ -17,11 +17,11 @@ const io=new Server(server,{
     }
 })
 app.use(cors(
-    {
-         origin:"https://resolve-now-1.onrender.com", // Adjust this to your frontend URL
-        methods:["GET","POST"],
-        credentials:true
-    }
+    // {
+    //     //  origin:"https://resolve-now-1.onrender.com", // Adjust this to your frontend URL
+    //     // methods:["GET","POST"],
+    //     // credentials:true
+    // }
 ));
 app.use(express.json());
 // MongoDB Connection
@@ -278,6 +278,7 @@ const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
