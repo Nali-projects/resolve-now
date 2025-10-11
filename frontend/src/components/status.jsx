@@ -9,7 +9,7 @@ export default function Status({ username }) {
     reconnectionAttempts:10,
     reconnectionDelay:1000
   });
-  const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:3000";
+  const BASE_URL = import.meta.env.VITE_API_URL;
 
 const api  = `${BASE_URL}/api/dataretrieve`;
 
@@ -283,6 +283,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
