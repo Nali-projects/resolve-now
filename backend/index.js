@@ -11,7 +11,7 @@ const app = express();
 const server=http.createServer(app);
 const io=new Server(server,{
     cors:{
-        origin:"http://localhost:5173", // Adjust this to your frontend URL
+        origin:"https://resolve-now-1.onrender.com", // Adjust this to your frontend URL
         methods:["GET","POST"],
         credentials:true,
     }
@@ -275,6 +275,7 @@ const port =3000;
 server.listen(port, () => {
     console.log("Server is running on port " + port);
 });
+
 
 
 
