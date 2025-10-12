@@ -74,9 +74,7 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
                 </nav>
             <section id="complaint">
                 <div className="complaint1">
-                    <form onSubmit={savedata}>
-                        <div className="complainthead">
-                        <label >Name: <p style={{ 
+                   <p style={{ 
   color: "#b45309", 
   backgroundColor: "#fff7ed", 
   padding: "8px 12px", 
@@ -85,7 +83,10 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
   marginTop: "10px"
 }}>
   ⚠️ <strong>Disclaimer:</strong> Please ensure your name matches the registered name exactly. Complaints may not display if there’s a mismatch.
-</p></label><br></br>
+</p>
+                    <form onSubmit={savedata}>
+                        <div className="complainthead">
+                        <label >Name: </label><br></br>
                         <input type="text" name="name" onChange={handlechange} required/><br></br>
                         <label >Address:</label><br></br>
                         <input type="text" name="address" onChange={handlechange}  required/><br></br>
@@ -114,6 +115,7 @@ if(image){formData.append("image", image); }else{formData.append("image", " ");}
         </>
     )
 }
+
 
 
 
