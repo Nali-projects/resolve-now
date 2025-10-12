@@ -12,6 +12,7 @@ export default function Status({ username }) {
   const BASE_URL = import.meta.env.VITE_API_URL;
 
 const api  = `${BASE_URL}/api/dataretrieve`;
+const user = { username };
 
   const addcards = async () => {
     //  e.preventDefault();
@@ -104,8 +105,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   const [id, setid] = useState("");
 
  const [form,setform]=useState({name:'',message:'',complaintId:'',sender:'user'});
-  const user = { username };
-
+  
   console.log(complaint);
   return (
     <>
@@ -284,6 +284,7 @@ const api  = `${BASE_URL}/api/dataretrieve`;
   )
 }
    
+
 
 
 
