@@ -67,4 +67,61 @@ The system follows a three-tier architecture:
 git clone  https://github.com/Nali-projects/resolve-now.git
 cd resolvenow
 
+##Step 2: Setup Backend
+cd server
+npm install
+
+
+Create a .env file inside the server folder and add:
+
+PORT=5000
+MONGO_URI=your_mongodb_connection_string
+JWT_SECRET=your_secret_key
+
+
+Start the backend server:
+
+npm start
+
+Step 3: Setup Frontend
+cd ../client
+npm install
+npm start
+
+Step 4: Access the Application
+
+Open your browser and go to:
+
+http://localhost:3000
+
+Modules
+Module	Description
+User Authentication	Secure login and registration using JWT
+Complaint Management	Users can submit and track their complaints
+Admin Dashboard	Admins can manage, filter, and resolve complaints
+Messaging System	Real-time chat between users and admin
+Reports & Analytics	View statistics related to complaints
+Future Enhancements
+
+Integration of email and SMS notifications for updates.
+
+Mobile application using React Native.
+
+AI-based complaint categorization and priority setting.
+
+Multi-level admin roles for large organizations.
+
+Graphical reports and dashboards for performance tracking.
+
+
+## Conclusion
+The ResolveNow application provides a digital solution for complaint registration and management using the MERN stack.  
+It enhances transparency, efficiency, and accountability between users and administrators.  
+Through this project, I learned how to integrate frontend and backend systems, handle APIs, and ensure secure data communication using JWT authentication.  
+
+Overall, ResolveNow demonstrates how technology can simplify problem reporting and resolution in real-world environments such as colleges, organizations, or public service systems.
+
+
+
+
 
